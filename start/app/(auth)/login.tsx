@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import AuthForm from '@/components/Form'
+
 
 const Login = () => {
   return (
-    <View>
-      <Text>Register</Text>
-    </View>
+    <>
+      <AuthForm mode="signin"/>
+    </>
   )
 }
 

@@ -6,58 +6,73 @@ import {
   TouchableOpacity,
   StyleSheet
 } from "react-native";
-
+import { useRouter } from "expo-router";
 import Animated, { FadeIn } from "react-native-reanimated";
 
-export default function AuthForm() {
+interface AuthFormProps {
+  mode: "signin" | "signup";
+}
 
-  // Toggle between SIGNIN and SIGNUP
-  const [isSignup, setIsSignup] = useState(false);
+const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
-  // Form state
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
+  const router = useRouter();
 
-
-  // Handle text input changes
-  const handleChange = (name: any, value: any) => {
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-
-  // Handle form submit
-  const handleSubmit = () => {
-
-    // Basic validation for signup
-    if (isSignup && formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
-      return;
+        //function for the buttons
+        const toggleText = () => {         
+        if (mode === "signup") {
+                    router.push("/(auth)/register");
+        }
+        else if (mode === "signin") {
+            router.push("/(auth)/login")
+        }
+        else {
+            console.log("CONTACT THE BLOODY DEV");
+        }
     }
 
-    // 👇 CONNECT YOUR BACKEND HERE
-    console.log("Submitted Data:", formData);
+    // Form state
+    const [formData, setFormData] = useState({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    });
 
-  };
+
+    // Handle text input changes
+    const handleChange = (name: any, value: any) => {
+        setFormData({
+        ...formData,
+        [name]: value
+        });
+    };
+
+
+    // Handle form submit
+    const handleSubmit = () => {
+
+        // Basic validation for signup
+        if (mode === "signup" && formData.password !== formData.confirmPassword) {
+        alert("Passwords do not match");
+        return;
+        }
+
+        // backend shii later         
+        console.log("Submitted Data:", formData);
+
+    };
 
 
   return (
 
     <View style={styles.container}>
 
-      {/* Title */}
       <Text style={styles.title}>
-        {isSignup ? "Create Account" : "Welcome Back"}
+        {mode === "signup" ? "Create Account" : "Welcome Back"}
       </Text>
 
 
-      {/* USERNAME */}
+      {/* Username */}
       <TextInput
         placeholder="Username"
         style={styles.input}
@@ -66,8 +81,8 @@ export default function AuthForm() {
       />
 
 
-      {/* EMAIL (Signup only) */}
-      {isSignup && (
+      {/* Email */}
+      {mode === "signup" && (
         <Animated.View entering={FadeIn.duration(400)}>
           <TextInput
             placeholder="Email"
@@ -79,7 +94,7 @@ export default function AuthForm() {
       )}
 
 
-      {/* PASSWORD */}
+      {/* Password */}
       <TextInput
         placeholder="Password"
         secureTextEntry
@@ -89,8 +104,8 @@ export default function AuthForm() {
       />
 
 
-      {/* CONFIRM PASSWORD (Signup only) */}
-      {isSignup && (
+      {/* Confirm Password */}
+      {mode === "signup" && (
         <Animated.View entering={FadeIn.duration(400)}>
           <TextInput
             placeholder="Confirm Password"
@@ -105,23 +120,21 @@ export default function AuthForm() {
       )}
 
 
-      {/* SUBMIT BUTTON */}
+      {/* Submit */}
       <TouchableOpacity
         style={styles.button}
         onPress={handleSubmit}
       >
         <Text style={styles.buttonText}>
-          {isSignup ? "Sign Up" : "Sign In"}
+          {mode === "signup" ? "Sign Up" : "Sign In"}
         </Text>
       </TouchableOpacity>
 
 
-      {/* TOGGLE SIGNIN/SIGNUP */}
-      <TouchableOpacity
-        onPress={() => setIsSignup(!isSignup)}
-      >
+      {/* Toggle */}
+      <TouchableOpacity onPress={toggleText}>
         <Text style={styles.switchText}>
-          {isSignup
+          {mode ==="signup"
             ? "Already have an account? Sign In"
             : "Don't have an account? Sign Up"}
         </Text>
@@ -130,8 +143,9 @@ export default function AuthForm() {
     </View>
 
   );
-}
+};
 
+export default AuthForm;
 
 const styles = StyleSheet.create({
 
