@@ -20,10 +20,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
         //function for the buttons
         const toggleText = () => {         
         if (mode === "signup") {
-                    router.push("/(auth)/register");
+                    router.push("/(auth)/login");
         }
         else if (mode === "signin") {
-            router.push("/(auth)/login")
+            router.push("/(auth)/register")
         }
         else {
             console.log("CONTACT THE BLOODY DEV");
@@ -59,7 +59,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
         // backend shii later         
         console.log("Submitted Data:", formData);
-
+        router.push("/(tabs)");
     };
 
 
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 14,
     borderRadius: 10,
-    marginBottom: 15
+    marginVertical: 22
   },
 
   button: {
