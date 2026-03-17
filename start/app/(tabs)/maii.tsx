@@ -1,12 +1,15 @@
 import { StyleSheet, View, Text, Image } from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
+import { useTheme } from '@/hooks/useTheme';
 
 export default function TabFourScreen() {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }] }>
       <Image source={require("../../assets/images/icon.png")} style={styles.image} />
-      <Text style={styles.title}>Tab Four</Text>
+      <Text style={[styles.title, { color: colors.text }]}>Profile</Text>
       <EditScreenInfo path="app/(tabs)/index.tsx" />
     </View>
   );
@@ -28,8 +31,8 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   image: {
-    width:20,
-    height:20,
+    width:200,
+    height:200,
     marginBottom: 20,
 
   }

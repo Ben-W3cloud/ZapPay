@@ -1,11 +1,13 @@
 import { StyleSheet, View, Text } from 'react-native';
-
 import EditScreenInfo from '@/components/EditScreenInfo';
+import { useTheme } from '@/hooks/useTheme';
 
 export default function TabOneScreen() {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
+    <View style={[styles.container, { backgroundColor: colors.background }] }>
+      <Text style={[styles.title, { color: colors.text }]}>Tab One</Text>
       <EditScreenInfo path="app/(tabs)/index.tsx" />
     </View>
   );

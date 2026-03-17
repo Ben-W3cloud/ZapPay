@@ -8,12 +8,15 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import Animated, { FadeIn } from "react-native-reanimated";
+import { useTheme } from '@/hooks/useTheme';
 
 interface AuthFormProps {
   mode: "signin" | "signup";
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
+
+  const { colors } = useTheme();
 
   const router = useRouter();
 
@@ -65,9 +68,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
   return (
 
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }] }>
 
-      <Text style={styles.title}>
+      <Text style={[styles.title, { color: colors.text }]}>
         {mode === "signup" ? "Create Account" : "Welcome Back"}
       </Text>
 
@@ -75,7 +78,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
       {/* Username */}
       <TextInput
         placeholder="Username"
-        style={styles.input}
+        placeholderTextColor={colors.textTertiary}
+        style={[styles.input, { backgroundColor: colors.surface, color: colors.text }]}
         value={formData.username}
         onChangeText={(text) => handleChange("username", text)}
       />
@@ -86,7 +90,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
         <Animated.View entering={FadeIn.duration(400)}>
           <TextInput
             placeholder="Email"
-            style={styles.input}
+            placeholderTextColor={colors.textTertiary}
+            style={[styles.input, { backgroundColor: colors.surface, color: colors.text }]}
             value={formData.email}
             onChangeText={(text) => handleChange("email", text)}
           />
@@ -97,8 +102,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
       {/* Password */}
       <TextInput
         placeholder="Password"
+        placeholderTextColor={colors.textTertiary}
         secureTextEntry
-        style={styles.input}
+        style={[styles.input, { backgroundColor: colors.surface, color: colors.text }]}
         value={formData.password}
         onChangeText={(text) => handleChange("password", text)}
       />
@@ -109,8 +115,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
         <Animated.View entering={FadeIn.duration(400)}>
           <TextInput
             placeholder="Confirm Password"
+            placeholderTextColor={colors.textTertiary}
             secureTextEntry
-            style={styles.input}
+            style={[styles.input, { backgroundColor: colors.surface, color: colors.text }]}
             value={formData.confirmPassword}
             onChangeText={(text) =>
               handleChange("confirmPassword", text)
@@ -122,10 +129,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
       {/* Submit */}
       <TouchableOpacity
-        style={styles.button}
+        style={[styles.button, { backgroundColor: colors.accent }]}
         onPress={handleSubmit}
       >
-        <Text style={styles.buttonText}>
+        <Text style={[styles.buttonText, { color: colors.background }]}>
           {mode === "signup" ? "Sign Up" : "Sign In"}
         </Text>
       </TouchableOpacity>
@@ -133,7 +140,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
       {/* Toggle */}
       <TouchableOpacity onPress={toggleText}>
-        <Text style={styles.switchText}>
+        <Text style={[styles.switchText, { color: colors.textSecondary }]}>
           {mode ==="signup"
             ? "Already have an account? Sign In"
             : "Don't have an account? Sign Up"}
@@ -153,33 +160,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 30,
-    backgroundColor: "#0f172a"
   },
 
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "white",
     marginBottom: 30,
     textAlign: "center"
   },
 
   input: {
-    backgroundColor: "white",
     padding: 14,
     borderRadius: 10,
-    marginVertical: 22
+    marginVertical: 22,
+    borderWidth: 1,
   },
 
   button: {
-    backgroundColor: "#2563eb",
     padding: 15,
     borderRadius: 10,
     marginTop: 10
   },
 
   buttonText: {
-    color: "white",
     textAlign: "center",
     fontWeight: "bold"
   },
@@ -187,7 +190,6 @@ const styles = StyleSheet.create({
   switchText: {
     marginTop: 20,
     textAlign: "center",
-    color: "#60a5fa"
   }
 
 });

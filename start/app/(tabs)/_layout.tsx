@@ -1,6 +1,8 @@
 import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
+import { useTheme } from '@/hooks/useTheme';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>['name'];
@@ -10,18 +12,30 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
+  const { colors } = useTheme();
+
   return (
-    <Tabs screenOptions={{
-      tabBarActiveTintColor: '#e91e63',
-        headerShown:false,
-        headerTitleAlign:'center',
-    }}>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: colors.accent,
+        tabBarInactiveTintColor: colors.tabIconDefault,
+        headerShown: false,
+        headerTitleAlign: 'center',
+        headerStyle: { backgroundColor: colors.surface },
+        headerTintColor: colors.text,
+        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border, 
+          height: 60, 
+          paddingBottom: 8, 
+          paddingTop: 8  },
+      }}
+    >
 
       <Tabs.Screen
         name="index"
         options={{
           title: 'Dashboard',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerRight: () => <TabBarIcon name="person" color='red'/>, //{**<ThemeToggle />**}
         }}
       />
 
@@ -44,9 +58,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="maii"
         options={{
-            headerShown:true,
-            title: 'Chat ',
-            tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
+          headerShown: true,
+          title: 'Maii',
+          tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />, 
         }}
       />
     </Tabs>

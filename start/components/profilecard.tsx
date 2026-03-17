@@ -1,14 +1,23 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { useTheme } from '@/hooks/useTheme'
 
-const profilecard = () => {
+const ProfileCard = () => {
+  const { colors } = useTheme();
+
   return (
-    <View>
-      <Text>profilecard</Text>
+    <View style={[styles.container, { backgroundColor: colors.surface, borderColor: colors.border }] }>
+      <Text style={{ color: colors.text, fontWeight: '600' }}>Profile</Text>
     </View>
   )
 }
 
-export default profilecard
+export default ProfileCard
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+  }
+})
