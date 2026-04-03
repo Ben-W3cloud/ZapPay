@@ -44,7 +44,7 @@ export default function ThemeShowcase() {
                   backgroundColor:
                     themeMode === mode ? colors.accent : colors.surface,
                   borderColor: colors.border,
-                },
+           },
               ]}
               onPress={() => setThemeMode(mode)}
             >

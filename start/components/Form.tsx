@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from "react-native";
 import { useRouter } from "expo-router";
-import Animated, { FadeIn } from "react-native-reanimated";
+// import Animated, { FadeIn } from "react-native-reanimated";
 import { useTheme } from '@/hooks/useTheme';
 
 interface AuthFormProps {
@@ -87,7 +87,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
       {/* Email */}
       {mode === "signup" && (
-        <Animated.View entering={FadeIn.duration(400)}>
+        // <Animated.View entering={FadeIn.duration(400)}>
           <TextInput
             placeholder="Email"
             placeholderTextColor={colors.textTertiary}
@@ -95,7 +95,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
             value={formData.email}
             onChangeText={(text) => handleChange("email", text)}
           />
-        </Animated.View>
+        // </Animated.View>
       )}
 
 
@@ -112,7 +112,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
       {/* Confirm Password */}
       {mode === "signup" && (
-        <Animated.View entering={FadeIn.duration(400)}>
+        // <Animated.View entering={FadeIn.duration(400)}>
           <TextInput
             placeholder="Confirm Password"
             placeholderTextColor={colors.textTertiary}
@@ -123,7 +123,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
               handleChange("confirmPassword", text)
             }
           />
-        </Animated.View>
+        // </Animated.View>
       )}
 
 

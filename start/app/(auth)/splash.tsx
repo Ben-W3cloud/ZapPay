@@ -7,7 +7,7 @@ const SPLASH_DURATION = 2500;
 export default function Splash() {
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace('/(onboarding)');
+      router.replace('/(auth)/onboarding');
     }, SPLASH_DURATION);
     return () => clearTimeout(timer);
   }, []);

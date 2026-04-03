@@ -4,7 +4,7 @@
     "slug": "start",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/splash-icon.png",
     "scheme": "start",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

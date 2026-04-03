@@ -7,8 +7,8 @@ export default function TabOneScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }] }>
-      <Text style={[styles.title, { color: colors.text }]}>Tab One</Text>
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      {/* <Text style={[styles.title, { color: colors.text }]}>Tab One</Text>
+      <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
     </View>
   );
 }
